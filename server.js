@@ -2,9 +2,14 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { swaggerUi, swaggerSpec } = require('./swagger');
+
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 app.use(cors());
 app.use(express.json());
